@@ -22,4 +22,4 @@ app.delete("/todos/:id", (req, res) => {
   res.status(204).send();
 });
 
-app.listen(3090, () => console.log("API running on http://localhost:3090"));
+app.listen(3000, () => console.log("API running on http://localhost:3000"));
