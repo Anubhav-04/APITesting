@@ -36,9 +36,11 @@ jobs:
       - name: "Security testing with owasp zap"
         run: |
              docker pull zaproxy/zap-stable
-             docker run -t zaproxy/zap-stable zap-baseline.py \
-             -t http://localhost:3000 \
-             -r zap_report.html
+             docker run -t --rm \
+              -v $(pwd):/zap/wrk \
+              zaproxy/zap-stable zap-baseline.py \
+              -t http://localhost:3000 \
+              -r zap_report.html
       - name: "Report generate" 
         uses: actions/upload-artifact@v4
         with:
