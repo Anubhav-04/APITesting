@@ -23,11 +23,8 @@ jobs:
 
       - name: "Install k6"
         uses: grafana/setup-k6-action@v1
+      
+      - name: "Run performance testing"
+        uses: grafana/run-k6-action@v1
         with:
-          k6-version: latest
-
-
-      - name: "Run integration and performance test"
-        run: |
-              npm run integration-test
-              npm run performance-test
+          path: load_test_k6.js
