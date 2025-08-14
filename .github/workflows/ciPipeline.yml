@@ -13,3 +13,23 @@ jobs:
         run: |
           curl -u "${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_API_TOKEN }}" \
                -X POST "${{ secrets.JENKINS_URL }}/job/API%20Testing%20Pipeline/build?token=rest_Api_Token"
+      - name: "Code checkout"
+        uses: actions/checkout@v5
+
+      - name: "Install node js"
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24.x'
+
+      - name: "Install k6"
+        run: |
+              sudo apt-get install -y gnupg software-properties-common
+              sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C5C1B7E0
+              sudo add-apt-repository "deb https://dl.k6.io/deb stable main"
+              sudo apt-get update
+              sudo apt-get install k6
+
+      - name: "Run integration and performance test"
+        run: |
+              npm run integration-test
+              npm run performance-test
