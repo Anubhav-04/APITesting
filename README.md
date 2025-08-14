@@ -27,3 +27,19 @@ Create a simple web application (or use an existing one)
 Write a JMeter or K6 test script to load test the application
 Automate the performance test in your CI/CD pipeline to run after every build
 Provide screenshots showing the performance results and graphs from the tool.
+
+------------------------------------------------------------------------
+
+Security Testing
+Task 6: Implement Basic Security Testing in a CI Pipeline
+
+Objective: Integrate security testing into the CI pipeline using tools like OWASP ZAP or SonarQube.
+
+Tools: OWASP ZAP, SonarQube, Jenkins, GitLab CI
+
+Instructions
+
+Set up a simple web application
+Use OWASP ZAP to scan the application for vulnerabilities or use SonarQube for static code analysis
+Automate these tests in the CI pipeline to run every time code is pushed
+Take screenshots showing any vulnerabilities or issues detected by the tool.
