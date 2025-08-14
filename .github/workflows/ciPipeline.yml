@@ -42,10 +42,10 @@ jobs:
                 -v $(pwd)/zap_reports:/zap/wrk \
                 zaproxy/zap-stable zap-baseline.py \
                 -t http://172.17.0.1:3000/todos \
-                -r zap_report.html
+                -r zap_report.html \
                 -I || true
       - name: "Report generate"
-        if: always()  # ensures report is uploaded even if ZAP fails
+        if: always()  
         uses: actions/upload-artifact@v4
         with:
               name: zap-report
