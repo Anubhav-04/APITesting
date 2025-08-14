@@ -26,3 +26,6 @@ jobs:
       
       - name: "Run performance testing"
         run: npm run performance-test
+
+      - name: "docker version"
+        run: docker --version
