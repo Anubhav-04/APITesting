@@ -25,6 +25,4 @@ jobs:
         uses: grafana/setup-k6-action@v1
       
       - name: "Run performance testing"
-        uses: grafana/run-k6-action@v1
-        with:
-          path: load_test_k6.js
+        run: npm run performance-test
