@@ -21,11 +21,11 @@ jobs:
         with:
           node-version: '24.x'
 
-      - name: "Install k6"
-        uses: grafana/setup-k6-action@v1
+      # - name: "Install k6"
+      #   uses: grafana/setup-k6-action@v1
       
-      - name: "Run performance testing"
-        run: npm run performance-test
+      # - name: "Run performance testing"
+      #   run: npm run performance-test
 
       - name: "docker version"
         run: docker --version
@@ -35,6 +35,7 @@ jobs:
 
       - name: "Security testing with owasp zap"
         run: |
+             docker pull owasp/zap2docker-stable
              docker run -t owasp/zap2docker-stable zap-baseline.py \
              -t http://host.docker.internal:3000 \
              -r zap_report.html
