@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-  "start": "node server.js",
+  "start": "node server.js & sleep 5",
   "integration-test": "node server.js & sleep 5 && newman run todo_api_tests.postman_collection.json",
   "performance-test": "node server.js & sleep 5 && k6 run load_test_k6.js"
 },
