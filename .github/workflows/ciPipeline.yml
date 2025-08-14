@@ -22,12 +22,10 @@ jobs:
           node-version: '24.x'
 
       - name: "Install k6"
-        run: |
-              sudo apt-get install -y gnupg software-properties-common
-              sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C5C1B7E0
-              sudo add-apt-repository "deb https://dl.k6.io/deb stable main"
-              sudo apt-get update
-              sudo apt-get install k6
+        uses: grafana/setup-k6-action@v1
+        with:
+          k6-version: latest
+
 
       - name: "Run integration and performance test"
         run: |
