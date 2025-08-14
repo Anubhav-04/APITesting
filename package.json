@@ -4,9 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "npm run test",
-    "start": "node server.js"
-  },
+  "start": "node server.js",
+  "integration-test": "node server.js & sleep 5 && newman run todo_api_tests.postman_collection.json && pkill node"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
