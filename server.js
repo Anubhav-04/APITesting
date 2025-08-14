@@ -5,6 +5,9 @@ app.use(express.json());
 let todos = [];
 
 // GET all todos
+
+app.get('/', (req, res) => res.send('OK'));
+
 app.get("/todos", (req, res) => {
   res.json(todos);
 });
