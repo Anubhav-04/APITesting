@@ -9,44 +9,56 @@ jobs:
   trigger:
     runs-on: ubuntu-latest
     steps:
+      - name: "Install node js"
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24.x"
+
+      - name: "Code checkout"
+        uses: actions/checkout@v5
+
+      - name: "Install dependencies"
+        run: npm install
+
+      - name: "List directories of project"
+        run: ls -l
+
+      - name: "Build our application"
+        run: npm run build
+
       - name: Trigger Jenkins build
         run: |
           curl -u "${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_API_TOKEN }}" \
                -X POST "${{ secrets.JENKINS_URL }}/job/API%20Testing%20Pipeline/build?token=rest_Api_Token"
-      - name: "Code checkout"
-        uses: actions/checkout@v5
-
-      - name: "Install node js"
-        uses: actions/setup-node@v4
-        with:
-          node-version: '24.x'
 
       - name: "Install k6"
         uses: grafana/setup-k6-action@v1
-      
+
       - name: "Run performance testing"
         run: npm run performance-test
-
-      - name: "docker version"
-        run: docker --version
 
       - name: "Start Application"
         run: npm run start
 
       - name: "Security testing with owasp zap"
         run: |
-              docker pull zaproxy/zap-stable
-              mkdir zap_reports
-              chmod 777 zap_reports
-              docker run -t --rm \
-                -v $(pwd)/zap_reports:/zap/wrk \
-                zaproxy/zap-stable zap-baseline.py \
-                -t http://172.17.0.1:3000/todos \
-                -r zap_report.html \
-                -I || true
+          docker pull zaproxy/zap-stable
+          mkdir zap_reports
+          chmod 777 zap_reports
+          docker run -t --rm \
+            -v $(pwd)/zap_reports:/zap/wrk \
+            zaproxy/zap-stable zap-baseline.py \
+            -t http://172.17.0.1:3000/todos \
+            -r zap_report.html \
+            -I || true
       - name: "Report generate"
-        if: always()  
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-              name: zap-report
-              path: zap_reports/zap_report.html
+          name: zap-report
+          path: zap_reports/zap_report.html
+      - name: "Upload artifact"
+        uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: dist

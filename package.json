@@ -4,15 +4,21 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-  "start": "node server.js & sleep 5",
-  "integration-test": "node server.js & sleep 5 && newman run todo_api_tests.postman_collection.json",
-  "performance-test": "node server.js & sleep 5 && k6 run load_test_k6.js"
-},
+    "build": "babel . --out-dir dist --ignore node_modules,todo_api_tests.postman_collection.json,load_test_k6.js,README.md,nohup.out",
+    "start": "node server.js & sleep 5",
+    "integration-test": "node server.js & sleep 5 && newman run todo_api_tests.postman_collection.json",
+    "performance-test": "node server.js & sleep 5 && k6 run load_test_k6.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
     "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.28.3",
+    "@babel/core": "^7.28.3",
+    "@babel/preset-env": "^7.28.3"
   }
 }
