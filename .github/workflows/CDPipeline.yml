@@ -31,4 +31,4 @@ jobs:
           github-token: ${{github.token}}
 
       - name: "Deploy to vercel"
-        run: vercel --prod --token=${{ secrets.NODE_TOKEN }} --confirm --name=APITesting
+        run: vercel --prod --token=${{ secrets.NODE_TOKEN }} --confirm --name=apitesting
